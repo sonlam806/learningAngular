@@ -11,8 +11,4 @@ export class AppComponent {
     name: 'Shindo',
     age: 27,
   };
-
-  handleClick() {
-    console.log('clicked !!!');
-  }
 }

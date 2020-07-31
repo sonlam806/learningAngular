@@ -1,4 +1,15 @@
-<h3>{{user.name}}</h3>
-<input type="text" [(ngModel)]="user.name">
+<hello *ngIf="user.age >= 17; else under17"></hello>
 
-<button (click)="handleClick()">Click Me</button>
+<ng-template #under17>
+  <div>
+    You dont have enough age to see this content
+  </div>
+</ng-template>
+
+<button (click)="user.age = user.age - 1">
+  -
+</button>
+<span>{{user.age}}</span>
+<button (click)="user.age = user.age + 1">
+  +
+</button>

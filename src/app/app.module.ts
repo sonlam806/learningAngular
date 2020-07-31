@@ -3,7 +3,7 @@ import { FormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
-import { HelloComponent } from './hello/hello.component';
+import { HelloComponent } from './hello.component';
 
 @NgModule({
   declarations: [AppComponent, HelloComponent],
