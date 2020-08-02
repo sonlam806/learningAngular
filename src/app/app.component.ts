@@ -7,8 +7,9 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'learningAngular';
-  user = {
-    name: 'Shindo',
-    age: 27,
-  };
+  serverName = 'test server';
+
+  createServerName(event): void {
+    this.serverName = event.target.value;
+  }
 }

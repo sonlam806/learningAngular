@@ -1,15 +1,7 @@
-<hello *ngIf="user.age >= 17; else under17"></hello>
+<p>{{ serverName }}</p>
 
-<ng-template #under17>
-  <div>
-    You dont have enough age to see this content
-  </div>
-</ng-template>
+<input type="text" (input)="createServerName($event)" />
 
-<button (click)="user.age = user.age - 1">
-  -
-</button>
-<span>{{user.age}}</span>
-<button (click)="user.age = user.age + 1">
-  +
-</button>
+<input type="text" [(ngModel)]="serverName" />
+
+<button (click)="serverName = ''">reset field</button>
