@@ -1,7 +1,6 @@
-<p>{{ serverName }}</p>
-
-<input type="text" (input)="createServerName($event)" />
-
-<input type="text" [(ngModel)]="serverName" />
-
-<button (click)="serverName = ''">reset field</button>
+<p
+  [ngStyle]="{ backgroundColor: serverStatus === 'online' ? 'green' : 'red' }"
+  [class.text-color]="serverStatus === 'online'"
+>
+  Server was created. Server with name {{ serverName }} is {{ serverStatus }}
+</p>
