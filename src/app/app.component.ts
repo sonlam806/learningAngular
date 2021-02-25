@@ -7,4 +7,11 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   name = 'shindo';
+  showSecret = false;
+  clicksTime : Array<number>= [];
+
+  onToggleShowSecret() {
+    this.showSecret = !this.showSecret;
+    this.clicksTime.push(this.clicksTime.length + 1)
+  }
 }
