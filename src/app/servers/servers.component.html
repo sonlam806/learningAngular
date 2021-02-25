@@ -1,6 +1,6 @@
 <input type="text" [(ngModel)]="newServerName" />
 
-<p>{{newServerName}}</p>
+<p [ngStyle]="{'font-size.px': newServerName !== '' ? 32 : 0}">{{newServerName}}</p>
 
 <button [disabled]="!allowNewServer"
   (click)="onCreateServer()"
