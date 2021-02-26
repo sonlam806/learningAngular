@@ -4,13 +4,13 @@
 
 <ul>
   <li
-    *ngFor="let time of clicksTime" [ngStyle]="{
-              backgroundColor: time >= 5 ? 'dodgerblue' : 'transparent',
+    *ngFor="let time of clicksTime; let idx = index" [ngStyle]="{
+              backgroundColor: idx >= 4 ? 'dodgerblue' : 'transparent',
       margin: '10px',
       padding: '8px 10px'
       }"
       [ngClass]="{
-        'white-text' : time >=5
+        'white-text' : idx >=4
       }"
   >{{time}}</li>
 </ul>

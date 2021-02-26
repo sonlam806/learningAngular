@@ -8,10 +8,10 @@ import { Component } from '@angular/core';
 export class AppComponent {
   name = 'shindo';
   showSecret = false;
-  clicksTime : Array<number>= [];
+  clicksTime : Array<string>= [];
 
   onToggleShowSecret() {
     this.showSecret = !this.showSecret;
-    this.clicksTime.push(this.clicksTime.length + 1)
+    this.clicksTime.push(new Date().toString())
   }
 }
