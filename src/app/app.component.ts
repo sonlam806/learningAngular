@@ -29,11 +29,22 @@ export class AppComponent {
     });
   }
 
-  onBlueprintAdded(blueprintData: { serverName: string; serverContent: string }) {
+  onBlueprintAdded(blueprintData: {
+    serverName: string;
+    serverContent: string;
+  }) {
     this.serverElements.push({
       type: 'blueprint',
       name: blueprintData.serverName,
       content: blueprintData.serverContent,
+    });
+  }
+
+  onSecretServerAdded(secretServerData: { serverName: string; serverContent: string }) {
+    this.serverElements.push({
+      type: 'secret',
+      name: secretServerData.serverName,
+      content: secretServerData.serverContent,
     });
   }
 }

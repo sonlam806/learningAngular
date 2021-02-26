@@ -3,32 +3,68 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 @Component({
   selector: 'app-cockpit',
   templateUrl: './cockpit.component.html',
-  styleUrls: ['./cockpit.component.css']
+  styleUrls: ['./cockpit.component.css'],
 })
 export class CockpitComponent implements OnInit {
- @Output() serverCreated = new EventEmitter<{serverName: string, serverContent: string}>();
- @Output() blueprintCreated = new EventEmitter<{serverName: string, serverContent: string}>();
-
+  @Output() serverCreated = new EventEmitter<{
+    serverName: string;
+    serverContent: string;
+  }>();
+  @Output() blueprintCreated = new EventEmitter<{
+    serverName: string;
+    serverContent: string;
+  }>();
+  @Output() secretServerCreated = new EventEmitter<{
+    serverName: string;
+    serverContent: string;
+  }>();
 
   newServerName = '';
   newServerContent = '';
 
-  constructor() { }
+  constructor() {}
 
-  ngOnInit(): void {
+  ngOnInit(): void {}
+
+  onAddServer(serverName: HTMLInputElement, serverContent: HTMLInputElement) {
+    if (serverName.value === '' || serverContent.value === '') return;
+
+    this.serverCreated.emit({
+      serverName: serverName.value,
+      serverContent: serverContent.value,
+    });
+
+    serverName.value = '';
+    serverContent.value = '';
   }
 
-  onAddServer() {
-    this.serverCreated.emit({serverName: this.newServerName, serverContent: this.newServerContent})
+  onAddBlueprint(
+    serverName: HTMLInputElement,
+    serverContent: HTMLInputElement
+  ) {
+    if (serverName.value === '' || serverContent.value === '') return;
 
-    this.newServerName = '';
-    this.newServerContent = '';
+    this.blueprintCreated.emit({
+      serverName: serverName.value,
+      serverContent: serverContent.value,
+    });
+
+    serverName.value = '';
+    serverContent.value = '';
   }
 
-  onAddBlueprint() {
-    this.blueprintCreated.emit({serverName: this.newServerName, serverContent: this.newServerContent})
+  onAddSecretServer(
+    serverName: HTMLInputElement,
+    serverContent: HTMLInputElement
+  ) {
+    if (serverName.value === '' || serverContent.value === '') return;
 
-    this.newServerName = '';
-    this.newServerContent = '';
+    this.secretServerCreated.emit({
+      serverName: serverName.value,
+      serverContent: serverContent.value,
+    });
+
+    serverName.value = '';
+    serverContent.value = '';
   }
 }
