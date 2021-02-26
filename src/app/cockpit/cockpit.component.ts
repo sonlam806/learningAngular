@@ -1,4 +1,11 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  EventEmitter,
+  OnInit,
+  Output,
+  ViewChild,
+} from '@angular/core';
 
 @Component({
   selector: 'app-cockpit',
@@ -19,8 +26,8 @@ export class CockpitComponent implements OnInit {
     serverContent: string;
   }>();
 
-  newServerName = '';
-  newServerContent = '';
+  // @ts-ignore
+  @ViewChild('serverNameContent') serverNameContent: ElementRef;
 
   constructor() {}
 
@@ -53,18 +60,14 @@ export class CockpitComponent implements OnInit {
     serverContent.value = '';
   }
 
-  onAddSecretServer(
-    serverName: HTMLInputElement,
-    serverContent: HTMLInputElement
-  ) {
-    if (serverName.value === '' || serverContent.value === '') return;
-
+  onAddSecretServer(serverName: HTMLInputElement) {
+    console.log(this.serverNameContent);
     this.secretServerCreated.emit({
       serverName: serverName.value,
-      serverContent: serverContent.value,
+      serverContent: this.serverNameContent.nativeElement.value,
     });
 
     serverName.value = '';
-    serverContent.value = '';
+    this.serverNameContent.nativeElement.value = '';
   }
 }
