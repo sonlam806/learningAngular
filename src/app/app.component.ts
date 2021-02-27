@@ -6,45 +6,9 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent {
-  serverElements = [
-    {
-      type: 'server',
-      name: 'development server',
-      content: 'Local server for FE dev team',
-    },
-    {
-      type: 'blueprint',
-      name: 'production staging server',
-      content: 'Server for testing in production',
-    },
-  ];
-  newServerName = '';
-  newServerContent = '';
+  name = ["shindo", "hikaru"];
 
-  onServerAdded(serverData: { serverName: string; serverContent: string }) {
-    this.serverElements.push({
-      type: 'server',
-      name: serverData.serverName,
-      content: serverData.serverContent,
-    });
-  }
-
-  onBlueprintAdded(blueprintData: {
-    serverName: string;
-    serverContent: string;
-  }) {
-    this.serverElements.push({
-      type: 'blueprint',
-      name: blueprintData.serverName,
-      content: blueprintData.serverContent,
-    });
-  }
-
-  onSecretServerAdded(secretServerData: { serverName: string; serverContent: string }) {
-    this.serverElements.push({
-      type: 'secret',
-      name: secretServerData.serverName,
-      content: secretServerData.serverContent,
-    });
+  onAddUser() {
+    this.name.push(Math.random().toString())
   }
 }
