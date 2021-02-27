@@ -1,7 +1,13 @@
-<app-lifecycle-hooks
-  *ngFor="let user of name"
-  [user]="user"
-></app-lifecycle-hooks>
+<app-game-control (intervalFired)="onIntervalFired($event)"></app-game-control>
 
-<button (click)="onAddUser()">Add user</button>
+<div class="container">
+  <div class="row">
+    <div class="col-6">
+      <app-odd *ngFor="let number of oddNumbers" [number]="number"></app-odd>
+    </div>
+    <div class="col-6">
+      <app-even *ngFor="let number of evenNumbers" [number]="number"></app-even>
+    </div>
+  </div>
+</div>
 
