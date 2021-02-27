@@ -1,0 +1,9 @@
+a {
+  cursor: pointer;
+  transition: all 300ms ease-in-out;
+}
+
+a:hover {
+  color: dodgerblue !important;
+}
+
