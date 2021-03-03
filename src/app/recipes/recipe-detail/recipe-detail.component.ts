@@ -1,20 +1,16 @@
-import { Component, Input, OnInit } from '@angular/core';
-import {Recipe} from '../recipe.model';
-import {RecipeService} from '../recipe.service';
+import { Component, OnInit, Input } from '@angular/core';
+import { Recipe } from '../recipe.model';
 
 @Component({
   selector: 'app-recipe-detail',
   templateUrl: './recipe-detail.component.html',
-  styleUrls: ['./recipe-detail.component.css']
+  styleUrls: ['./recipe-detail.component.css'],
 })
 export class RecipeDetailComponent implements OnInit {
-  // @ts-ignore
-  recipe: Recipe = { name: '', description: '', imagePath: ''}
+  @Input() recipe: Recipe = new Recipe('', '', '');
 
-  constructor(private recipeService: RecipeService) { }
+  constructor() {}
 
-  ngOnInit(): void {
-    this.recipe = this.recipeService.getSelectedRecipe();
-  }
-
+  ngOnInit(): void {}
 }
+
