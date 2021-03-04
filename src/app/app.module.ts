@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
-import {FormsModule} from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
-
+import { RouterModule, Routes } from '@angular/router';
 
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './navbar/navbar.component';
@@ -13,6 +13,13 @@ import { ServerEditComponent } from './servers/server-edit/server-edit.component
 import { ServerDetailComponent } from './servers/server-detail/server-detail.component';
 import { UserListItemComponent } from './users/user-list/user-list-item/user-list-item.component';
 import { ServerItemComponent } from './servers/server-item/server-item.component';
+import { HomeComponent } from './home/home.component';
+
+const appRoutes: Routes = [
+  { path: '', component: HomeComponent },
+  { path: 'users', component: UsersComponent },
+  { path: 'servers', component: ServersComponent },
+];
 
 @NgModule({
   declarations: [
@@ -26,12 +33,11 @@ import { ServerItemComponent } from './servers/server-item/server-item.component
     ServerDetailComponent,
     UserListItemComponent,
     ServerItemComponent,
+    HomeComponent,
   ],
-  imports: [
-    BrowserModule,
-    FormsModule
-  ],
+  imports: [BrowserModule, FormsModule, RouterModule.forRoot(appRoutes)],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
+
