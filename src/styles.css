@@ -1,9 +1,31 @@
-/* You can add global styles to this file, and also import other style files */
+a {
+  text-decoration: none;
+  color: dodgerblue;
+  padding: 4px 8px;
+  transition: all 300ms ease-in-out;
+
+  cursor: pointer;
+}
+a:hover {
+  color: goldenrod !important;
+}
+.dropdown {
+  position: relative;
+}
+
 .dropdown-toggle.show .dropdown-menu {
   display: block !important;
+  bottom: 0;
+  left: 0;
 }
 
 .dropdown-toggle.show + .dropdown-menu {
+  display: block !important;
+  bottom: 0;
+  left: 0;
+}
+
+.dropdown-toggle.show + ul {
   display: block !important;
 }
 

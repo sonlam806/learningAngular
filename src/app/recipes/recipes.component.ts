@@ -8,7 +8,7 @@ import { RecipeService } from './recipe.service';
   styleUrls: ['./recipes.component.css'],
 })
 export class RecipesComponent implements OnInit {
-  selectedRecipe: Recipe = { name: '', description: '', imagePath: '' };
+  selectedRecipe: Recipe = { name: '', description: '', imagePath: '', ingredients: [{name: '', amount: 0}] };
 
   constructor(private recipesService: RecipeService) {}
 
