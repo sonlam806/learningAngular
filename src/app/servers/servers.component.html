@@ -1,0 +1,31 @@
+<div class="row">
+  <div class="col-4">
+    <ul class="list-group">
+      <app-server-item
+        *ngFor="let server of servers"
+        [server]="server"
+      ></app-server-item>
+    </ul>
+  </div>
+  <div class="col-4">
+    <div class="row">
+      <div class="col-12">
+        <div class="mb-3">
+          <label for="serverName" class="form-label">Server Name</label>
+          <input type="text" class="form-control" id="serverName" />
+        </div>
+        <div class="mb-3">
+          <label for="serverStatus" class="form-label">Server Status</label>
+          <input type="text" class="form-control" id="serverStatus" />
+        </div>
+        <button class="btn btn-primary mb-3">Update Server</button>
+      </div>
+      <hr />
+      <div class="col-12">
+        <h5>Production server</h5>
+        <p>Server status is online</p>
+      </div>
+    </div>
+  </div>
+</div>
+

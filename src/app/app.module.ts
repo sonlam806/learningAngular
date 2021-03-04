@@ -2,35 +2,36 @@ import { NgModule } from '@angular/core';
 import {FormsModule} from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 
-import { RecipeService} from './recipes/recipe.service';
 
 import { AppComponent } from './app.component';
-import {HeaderComponent} from './header/header.component';
-import { RecipesComponent } from './recipes/recipes.component';
-import { RecipeListComponent } from './recipes/recipe-list/recipe-list.component';
-import { RecipeItemComponent } from './recipes/recipe-list/recipe-item/recipe-item.component';
-import { RecipeDetailComponent } from './recipes/recipe-detail/recipe-detail.component';
-import { ShoppingListComponent } from './shopping-list/shopping-list.component';
-import { ShoppingEditComponent } from './shopping-list/shopping-edit/shopping-edit.component';
-import { DropdownDirective } from './directives/dropdown.directive';
+import { NavbarComponent } from './navbar/navbar.component';
+import { UsersComponent } from './users/users.component';
+import { ServersComponent } from './servers/servers.component';
+import { UserListComponent } from './users/user-list/user-list.component';
+import { UserDetailComponent } from './users/user-detail/user-detail.component';
+import { ServerEditComponent } from './servers/server-edit/server-edit.component';
+import { ServerDetailComponent } from './servers/server-detail/server-detail.component';
+import { UserListItemComponent } from './users/user-list/user-list-item/user-list-item.component';
+import { ServerItemComponent } from './servers/server-item/server-item.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    HeaderComponent,
-    RecipesComponent,
-    RecipeListComponent,
-    RecipeItemComponent,
-    RecipeDetailComponent,
-    ShoppingListComponent,
-    ShoppingEditComponent,
-    DropdownDirective
+    NavbarComponent,
+    UsersComponent,
+    ServersComponent,
+    UserListComponent,
+    UserDetailComponent,
+    ServerEditComponent,
+    ServerDetailComponent,
+    UserListItemComponent,
+    ServerItemComponent,
   ],
   imports: [
     BrowserModule,
     FormsModule
   ],
-  providers: [RecipeService],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
