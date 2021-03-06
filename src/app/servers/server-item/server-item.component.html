@@ -1,2 +1,10 @@
-<li class="list-group-item">{{ server.name }}</li>
+<li class="list-group-item">
+  <a
+    [routerLink]="['/servers', server.id, 'edit']"
+    [queryParams]="{ allowEdit: 1 }"
+    [fragment]="'loading'"
+  >
+    {{ server.name }}
+  </a>
+</li>
 

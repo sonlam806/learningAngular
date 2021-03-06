@@ -1,20 +1,25 @@
 <div class="row">
   <div class="col-4">
     <ul class="list-group">
-      <app-server-item
-        *ngFor="let server of servers"
-        [server]="server"
-      ></app-server-item>
+      <div class="list-group">
+        <a
+          [routerLink]="['/servers', server.id]"
+          [queryParams]="{ allowEdit: server.id === 3 ? '1' : '0' }"
+          fragment="loading"
+          href="#"
+          class="list-group-item"
+          *ngFor="let server of servers"
+        >
+          {{ server.name }}
+        </a>
+      </div>
     </ul>
   </div>
   <div class="col-4">
     <div class="row">
       <app-server-edit></app-server-edit>
       <hr />
-      <div class="col-12">
-        <h5>Production server</h5>
-        <p>Server status is online</p>
-      </div>
+      <app-server-detail></app-server-detail>
     </div>
   </div>
 </div>

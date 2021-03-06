@@ -1,11 +1,16 @@
 <div class="col-12">
   <div class="mb-3">
     <label for="serverName" class="form-label">Server Name</label>
-    <input type="text" class="form-control" id="serverName" />
+    <input
+      type="text"
+      class="form-control"
+      id="serverName"
+      [(ngModel)]="serverName"
+    />
   </div>
   <div class="mb-3">
     <label for="serverStatus" class="form-label">Server Status</label>
-    <select class="form-select">
+    <select class="form-select" [(ngModel)]="serverStatus">
       <option value="online">Online</option>
       <option value="offline">Offline</option>
       <option value="hidden">Hidden</option>

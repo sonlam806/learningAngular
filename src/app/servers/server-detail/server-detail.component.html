@@ -1,1 +1,5 @@
-<p>server-detail works!</p>
+<div class="col-12" [ngStyle]="server.id === 0 ? { display: 'none' } : null">
+  <h5>{{ server.name }}</h5>
+  <p>Server status is {{ server.status }}</p>
+</div>
+
