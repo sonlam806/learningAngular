@@ -16,15 +16,22 @@ import { ServerDetailComponent } from './servers/server-detail/server-detail.com
 import { UserListItemComponent } from './users/user-list/user-list-item/user-list-item.component';
 import { ServerItemComponent } from './servers/server-item/server-item.component';
 import { HomeComponent } from './home/home.component';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
 const appRoutes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'users', component: UsersComponent },
   { path: 'users/:id', component: UserDetailComponent },
   { path: 'users/:id/:name', component: UserDetailComponent },
-  { path: 'servers', component: ServersComponent },
-  { path: 'servers/:id', component: ServerDetailComponent },
-  { path: 'servers/:id/edit', component: ServerEditComponent },
+  {
+    path: 'servers',
+    component: ServersComponent,
+    children: [
+      { path: ':id', component: ServerDetailComponent },
+      { path: ':id/edit', component: ServerEditComponent },
+    ],
+  },
+  { path: '**', component: PageNotFoundComponent },
 ];
 
 @NgModule({
@@ -40,6 +47,7 @@ const appRoutes: Routes = [
     UserListItemComponent,
     ServerItemComponent,
     HomeComponent,
+    PageNotFoundComponent,
   ],
   imports: [BrowserModule, FormsModule, RouterModule.forRoot(appRoutes)],
   providers: [ServerService],

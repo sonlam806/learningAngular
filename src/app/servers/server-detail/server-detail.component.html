@@ -1,5 +1,7 @@
 <div class="col-12" [ngStyle]="server.id === 0 ? { display: 'none' } : null">
   <h5>{{ server.name }}</h5>
   <p>Server status is {{ server.status }}</p>
+
+  <button class="btn btn-primary" (click)="onEdit()">Edit server</button>
 </div>
 
