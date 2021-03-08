@@ -4,9 +4,9 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 
 import { ServerService } from './servers/server.service';
-import {AuthService} from './auth.service';
-import {AuthGuard} from './auth-guard.service';
-import {CanDeactivateGuard} from './servers/server-edit/can-deactivate-guard.service';
+import { AuthService } from './auth.service';
+import { AuthGuard } from './auth-guard.service';
+import { CanDeactivateGuard } from './servers/server-edit/can-deactivate-guard.service';
 
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './navbar/navbar.component';
@@ -20,6 +20,8 @@ import { UserListItemComponent } from './users/user-list/user-list-item/user-lis
 import { ServerItemComponent } from './servers/server-item/server-item.component';
 import { HomeComponent } from './home/home.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { ErrorPageComponent } from './error-page/error-page.component';
+import { ServerResolver } from './servers/server-resolver.service';
 
 @NgModule({
   declarations: [
@@ -35,9 +37,16 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
     ServerItemComponent,
     HomeComponent,
     PageNotFoundComponent,
+    ErrorPageComponent,
   ],
   imports: [BrowserModule, FormsModule, AppRoutingModule],
-  providers: [ServerService, AuthService, AuthGuard, CanDeactivateGuard],
+  providers: [
+    ServerService,
+    AuthService,
+    AuthGuard,
+    CanDeactivateGuard,
+    ServerResolver,
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

@@ -1,8 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Data } from '@angular/router';
 
 import { Server } from '../server.model';
-import { ServerService } from '../server.service';
 
 @Component({
   selector: 'app-server-item',
@@ -12,14 +11,12 @@ import { ServerService } from '../server.service';
 export class ServerItemComponent implements OnInit {
   server: Server = { id: 0, name: '', status: '' };
 
-  constructor(
-    private serversService: ServerService,
-    private route: ActivatedRoute
-  ) {}
+  constructor(private route: ActivatedRoute) {}
 
   ngOnInit(): void {
-    const id = +this.route.snapshot.params['id'];
-    this.server = this.serversService.getServer(id);
+    this.route.data.subscribe((data: Data) => {
+      this.server = data['server'];
+    });
   }
 }
 
