@@ -1,8 +1,12 @@
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
+import { AppRoutingModule } from './app-routing.module';
 
 import { ServerService } from './servers/server.service';
+import {AuthService} from './auth.service';
+import {AuthGuard} from './auth-guard.service';
+import {CanDeactivateGuard} from './servers/server-edit/can-deactivate-guard.service';
 
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './navbar/navbar.component';
@@ -16,9 +20,6 @@ import { UserListItemComponent } from './users/user-list/user-list-item/user-lis
 import { ServerItemComponent } from './servers/server-item/server-item.component';
 import { HomeComponent } from './home/home.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
-import { AppRoutingModule } from './app-routing.module';
-import {AuthService} from './auth.service';
-import {AuthGuard} from './auth-guard.service';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,7 @@ import {AuthGuard} from './auth-guard.service';
     PageNotFoundComponent,
   ],
   imports: [BrowserModule, FormsModule, AppRoutingModule],
-  providers: [ServerService, AuthService, AuthGuard],
+  providers: [ServerService, AuthService, AuthGuard, CanDeactivateGuard],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
