@@ -1,2 +1,4 @@
-<li class="list-group-item">{{ user.name }}</li>
+<li class="list-group-item">
+  <a [routerLink]="['/users', user.id, user.name]">{{ user.name }}</a>
+</li>
 
