@@ -28,5 +28,12 @@ export class ServerService {
 
     return server;
   }
-}
 
+  updateServer(id: number, newServerInfo: { name: string; status: string }) {
+    let matchedServer = this.servers.find((server) => server.id === id);
+    if (matchedServer) {
+      matchedServer.name = newServerInfo.name;
+      matchedServer.status = newServerInfo.status;
+    }
+  }
+}
