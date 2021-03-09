@@ -1,2 +1,42 @@
-<app-servers></app-servers>
+<div class="container mt-4">
+  <div class="row">
+    <div class="col-12">
+      <ul class="nav nav-tabs">
+        <li class="nav-item">
+          <a
+            class="nav-link"
+            aria-current="page"
+            [routerLink]="['/']"
+            [routerLinkActive]="'active'"
+            [routerLinkActiveOptions]="{ exact: true }"
+            >Home</a
+          >
+        </li>
+        <li class="nav-item">
+          <a
+            class="nav-link"
+            aria-current="page"
+            [routerLink]="['user', 1]"
+            [routerLinkActive]="'active'"
+            >User 1</a
+          >
+        </li>
+        <li class="nav-item">
+          <a
+            class="nav-link"
+            aria-current="page"
+            [routerLink]="['user', 2]"
+            [routerLinkActive]="'active'"
+            >User 2</a
+          >
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="row mt-4">
+    <div class="col-12">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>
 
