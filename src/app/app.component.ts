@@ -5,10 +5,5 @@ import { Component } from '@angular/core';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
 })
-export class AppComponent {
-  location: string = 'recipes';
+export class AppComponent {}
 
-  onChangeLocation(newLocation: string) {
-    this.location = newLocation;
-  }
-}
