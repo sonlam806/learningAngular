@@ -11,4 +11,3 @@ export class AppComponent {
     console.log('submmited', form);
   }
 }
-
