@@ -1,4 +1,4 @@
-<div class="row">
+<div class="row my-4">
   <div class="col-12">
     <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
       <div class="mb-3">
@@ -23,13 +23,6 @@
           formControlName="email"
           required
         />
-        <!-- <div -->
-        <!--   *ngIf="email.touched && !email.valid" -->
-        <!--   class="alert alert-danger mt-1" -->
-        <!--   role="alert" -->
-        <!-- > -->
-        <!--   Please enter a valid email address! -->
-        <!-- </div> -->
       </div>
       <div class="mb-3">
         <label for="secret-question" class="form-label">Secret Questions</label>
@@ -51,6 +44,18 @@
             formControlName="gender"
           />{{ gender }}</label
         >
+      </div>
+      <div class="mb-3" formArrayName="hobbies">
+        <h3>Your Hobbies</h3>
+        <button class="btn btn-secondary" (click)="onAddHobby()">
+          Add Hooby
+        </button>
+        <div
+          class="form-group"
+          *ngFor="let hobbyControl of getHobbyControls(); let idx = index"
+        >
+          <input type="text" [formControlName]="idx" />
+        </div>
       </div>
       <button class="btn btn-primary" type="submit">Submit</button>
     </form>
