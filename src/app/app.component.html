@@ -1,7 +1,7 @@
 <div class="container mt-4">
   <div class="row">
     <div class="col-12">
-      <form (ngSubmit)="onSubmit(formEl)" #formEl="ngForm">
+      <form (ngSubmit)="onSubmit()" #formEl="ngForm">
         <div class="mb-3">
           <label for="username" class="form-label">Username</label>
           <input
@@ -10,8 +10,12 @@
             id="username"
             ngModel
             name="username"
+            required
           />
-          <button class="btn btn-outline-primary mt-3">
+          <button
+            class="btn btn-outline-primary mt-3"
+            (click)="suggestUserName()"
+          >
             Suggest an Username
           </button>
         </div>
@@ -23,7 +27,17 @@
             id="email"
             ngModel
             name="email"
+            required
+            email
+            #email="ngModel"
           />
+          <div
+            *ngIf="email.touched && !email.valid"
+            class="alert alert-danger mt-1"
+            role="alert"
+          >
+            Please enter a valid email address!
+          </div>
         </div>
         <div class="mb-3">
           <label for="secret-question" class="form-label"
@@ -32,14 +46,30 @@
           <select
             class="form-select"
             id="secret-question"
-            ngModel
+            [ngModel]="defaultQuestion"
             name="secretQuestion"
           >
             <option value="pet">Your first Pet?</option>
             <option value="teacher">Your first Teacher?</option>
           </select>
         </div>
-        <button class="btn btn-primary" type="submit">Submit</button>
+        <div class="form-group">
+          <textarea
+            class="form-control mb-3"
+            name="questionAnswer"
+            rows="3"
+            [(ngModel)]="answer"
+          >
+          </textarea>
+          <p>Your reply: {{ answer }}</p>
+        </div>
+        <button
+          class="btn btn-primary"
+          type="submit"
+          [disabled]="!formEl.valid"
+        >
+          Submit
+        </button>
       </form>
     </div>
   </div>

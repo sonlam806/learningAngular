@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 
 @Component({
@@ -7,7 +7,25 @@ import { NgForm } from '@angular/forms';
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent {
-  onSubmit(form: NgForm) {
-    console.log('submmited', form);
+  // @ts-ignore
+  @ViewChild('formEl') signupForm: NgForm;
+  defaultQuestion = 'pet';
+  answer = '';
+
+
+  // onSubmit(form: NgForm) {
+  //   console.log('submmited', form);
+  // }
+
+  suggestUserName() {
+    const suggestedName = 'SpiderMan';
+    this.signupForm.form.patchValue({
+      username: suggestedName
+    })
+
+  }
+
+  onSubmit() {
+    console.log(this.signupForm)
   }
 }
