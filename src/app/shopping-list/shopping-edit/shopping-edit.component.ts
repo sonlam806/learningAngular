@@ -1,16 +1,24 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  OnDestroy,
+  OnInit,
+  Output,
+} from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ShoppingListService } from '../shopping-list.service';
 
 import { Ingredient } from 'src/app/shared/ingredient.model';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-shopping-edit',
   templateUrl: './shopping-edit.component.html',
   styleUrls: ['./shopping-edit.component.css'],
 })
-export class ShoppingEditComponent implements OnInit {
+export class ShoppingEditComponent implements OnInit, OnDestroy {
   @Output() newIngredientAdded = new EventEmitter<Ingredient>();
+  editItemSub!: Subscription;
   shoppingListForm = new FormGroup({
     name: new FormControl(null, [Validators.required]),
     amount: new FormControl(null, [Validators.required]),
@@ -19,7 +27,7 @@ export class ShoppingEditComponent implements OnInit {
   constructor(private shoppingListService: ShoppingListService) {}
 
   ngOnInit(): void {
-    this.shoppingListService.ingredientEdit.subscribe(
+    this.editItemSub = this.shoppingListService.ingredientEdit.subscribe(
       (ingredient: Ingredient) => {
         this.shoppingListForm.patchValue({
           name: ingredient.name,
@@ -39,6 +47,9 @@ export class ShoppingEditComponent implements OnInit {
     this.shoppingListForm.reset();
   }
 
+  ngOnDestroy() {
+    this.editItemSub.unsubscribe();
+  }
   clearForm() {
     this.shoppingListForm.reset();
   }
