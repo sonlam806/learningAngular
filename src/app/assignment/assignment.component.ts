@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import {
-  AsyncValidatorFn,
   FormControl,
   FormGroup,
   ValidationErrors,
