@@ -43,6 +43,7 @@ export class RecipeEditComponent implements OnInit {
           recipeIngredients.push(
             new FormGroup({
               name: new FormControl(ingredient.name),
+              amount: new FormControl(ingredient.amount),
             })
           );
         }
@@ -59,6 +60,10 @@ export class RecipeEditComponent implements OnInit {
 
   onSubmit() {
     console.log('submitted');
+  }
+
+  getRecipeFormControls() {
+   return (<FormArray>this.recipeForm.get('recipeIngredients')).controls;
   }
 }
 
