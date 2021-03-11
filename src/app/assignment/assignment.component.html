@@ -12,11 +12,11 @@
         />
         <p
           *ngIf="
-            projectForm.get('projectName').touched &&
-            projectForm.get('projectName').errors['invalid']
+            projectForm.get('projectName')?.touched &&
+            projectForm.get('projectName')?.errors?.invalid
           "
         >
-          Project name is forbidden
+          Project name is forbidden, please choose another name
         </p>
       </div>
       <div class="row mb-3">
