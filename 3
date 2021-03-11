@@ -19,7 +19,6 @@ import { Subscription } from 'rxjs';
 export class ShoppingEditComponent implements OnInit, OnDestroy {
   @Output() newIngredientAdded = new EventEmitter<Ingredient>();
   editMode = false;
-  editItemIndex: number = -1;
   editItemSub!: Subscription;
   shoppingListForm = new FormGroup({
     name: new FormControl(null, [Validators.required]),
@@ -30,9 +29,8 @@ export class ShoppingEditComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.editItemSub = this.shoppingListService.ingredientEdit.subscribe(
-      ({ index, ingredient }: { index: number; ingredient: Ingredient }) => {
+      (ingredient: Ingredient) => {
         this.editMode = true;
-        this.editItemIndex = index;
         this.shoppingListForm.patchValue({
           name: ingredient.name,
           amount: ingredient.amount,
@@ -41,23 +39,17 @@ export class ShoppingEditComponent implements OnInit, OnDestroy {
     );
   }
 
-  onAddIngredient(): void {
+  onAddIngredient() {
     if (this.editMode) {
-      this.shoppingListService.updateEditIngredient(this.editItemIndex, {
-        name: this.shoppingListForm.get('name')?.value,
-        amount: this.shoppingListForm.get('amount')?.value,
-      });
-      this.shoppingListForm.reset();
       return;
-    } else {
-      const newIngredient = {
-        name: this.shoppingListForm.get('name')?.value,
-        amount: this.shoppingListForm.get('amount')?.value,
-      };
-      this.shoppingListService.onAddNewIngredient(newIngredient);
-
-      this.shoppingListForm.reset();
     }
+    const newIngredient = {
+      name: this.shoppingListForm.get('name')?.value,
+      amount: this.shoppingListForm.get('amount')?.value,
+    };
+    this.shoppingListService.onAddNewIngredient(newIngredient);
+
+    this.shoppingListForm.reset();
   }
 
   ngOnDestroy() {
