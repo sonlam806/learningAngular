@@ -1,6 +1,7 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Ingredient } from 'src/app/shared/ingredient.model';
-import {ShoppingListService} from '../shopping-list.service';
+import { ShoppingListService } from '../shopping-list.service';
 
 @Component({
   selector: 'app-shopping-edit',
@@ -8,23 +9,29 @@ import {ShoppingListService} from '../shopping-list.service';
   styleUrls: ['./shopping-edit.component.css'],
 })
 export class ShoppingEditComponent implements OnInit {
-  ingredientName: string = '';
-  ingredientAmount: number = 0;
-
   @Output() newIngredientAdded = new EventEmitter<Ingredient>();
+  shoppingListForm = new FormGroup({
+    name: new FormControl(null, [Validators.required]),
+    amount: new FormControl(null, [Validators.required]),
+  });
 
   constructor(private shoppingListService: ShoppingListService) {}
 
   ngOnInit(): void {}
 
   onAddIngredient() {
-    this.shoppingListService.onAddNewIngredient({
-      name: this.ingredientName,
-      amount: this.ingredientAmount,
-    })
+    const newIngredient = {
+      name: this.shoppingListForm.get('name')?.value,
+      amount: this.shoppingListForm.get('amount')?.value,
+    };
+    this.shoppingListService.onAddNewIngredient(newIngredient);
 
-    this.ingredientName = '';
-    this.ingredientAmount = 0;
+    this.onSubmit();
+  }
+
+  onSubmit() {
+    console.log('submitted!');
+    this.shoppingListForm.reset();
   }
 }
 
