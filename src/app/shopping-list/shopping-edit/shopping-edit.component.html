@@ -49,9 +49,16 @@
             type="submit"
             [disabled]="!shoppingListForm.valid"
           >
-            {{ editMode ? "Save" : "Add" }}
+            {{ editMode ? "Update" : "Add" }}
           </button>
-          <button class="btn btn-danger mx-2" type="button">Delete</button>
+          <button
+            class="btn btn-danger mx-2"
+            type="button"
+            [disabled]="editItemIndex === -1"
+            (click)="deleteIngredient()"
+          >
+            Delete
+          </button>
           <button class="btn btn-primary" type="button" (click)="clearForm()">
             Clear
           </button>
