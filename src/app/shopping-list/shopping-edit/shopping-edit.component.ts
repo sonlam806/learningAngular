@@ -1,7 +1,8 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Ingredient } from 'src/app/shared/ingredient.model';
 import { ShoppingListService } from '../shopping-list.service';
+
+import { Ingredient } from 'src/app/shared/ingredient.model';
 
 @Component({
   selector: 'app-shopping-edit',
@@ -17,7 +18,16 @@ export class ShoppingEditComponent implements OnInit {
 
   constructor(private shoppingListService: ShoppingListService) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.shoppingListService.ingredientEdit.subscribe(
+      (ingredient: Ingredient) => {
+        this.shoppingListForm.patchValue({
+          name: ingredient.name,
+          amount: ingredient.amount,
+        });
+      }
+    );
+  }
 
   onAddIngredient() {
     const newIngredient = {
@@ -26,11 +36,10 @@ export class ShoppingEditComponent implements OnInit {
     };
     this.shoppingListService.onAddNewIngredient(newIngredient);
 
-    this.onSubmit();
+    this.shoppingListForm.reset();
   }
 
-  onSubmit() {
-    console.log('submitted!');
+  clearForm() {
     this.shoppingListForm.reset();
   }
 }

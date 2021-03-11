@@ -1,6 +1,6 @@
 <div class="row">
   <div class="col-xs-12">
-    <form (ngSubmit)="onSubmit()" [formGroup]="shoppingListForm">
+    <form (ngSubmit)="onAddIngredient()" [formGroup]="shoppingListForm">
       <div class="row">
         <div class="col-sm-5 form-group">
           <label for="name">Name</label>
@@ -11,6 +11,14 @@
             class="form-control"
             formControlName="name"
           />
+          <span
+            *ngIf="
+              shoppingListForm.get('name')?.touched &&
+              !shoppingListForm.get('name')?.valid
+            "
+            style="color: red"
+            >Please enter ingredient name</span
+          >
         </div>
         <div class="col-sm-2 form-group">
           <label for="amount">Amount</label>
@@ -20,7 +28,17 @@
             name="amount"
             class="form-control"
             formControlName="amount"
+            required
+            pattern="^[1-9]+[0-9]*$"
           />
+          <span
+            *ngIf="
+              shoppingListForm.get('amount')?.touched &&
+              !shoppingListForm.get('amount')?.valid
+            "
+            style="color: red"
+            >Please enter a number greater then 0</span
+          >
         </div>
       </div>
 
@@ -29,12 +47,14 @@
           <button
             class="btn btn-success"
             type="submit"
-            (click)="onAddIngredient()"
+            [disabled]="!shoppingListForm.valid"
           >
             Add
           </button>
           <button class="btn btn-danger mx-2" type="button">Delete</button>
-          <button class="btn btn-primary" type="button">Clear</button>
+          <button class="btn btn-primary" type="button" (click)="clearForm()">
+            Clear
+          </button>
         </div>
       </div>
     </form>
