@@ -14,7 +14,7 @@ export class RecipeService {
       'Hambuger',
       'This is simply a test',
       'http://assets.epicurious.com/photos/57c5c6d9cf9e9ad43de2d96e/master/pass/the-ultimate-hamburger.jpg',
-      [new Ingredient('bread', 10)]
+      [new Ingredient('bread', 10), new Ingredient('meat', 2)]
     ),
     new Recipe(
       'Hamburger 2',
