@@ -32,6 +32,16 @@
             id="imageURL"
             class="form-control"
             formControlName="imageURL"
+            #imagePath
+          />
+        </div>
+      </div>
+      <div class="row" *ngIf="imagePath.value !== ''">
+        <div class="mb-3">
+          <img
+            [src]="imagePath.value"
+            alt="recipe image"
+            class="img-thumbnail"
           />
         </div>
       </div>
