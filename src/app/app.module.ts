@@ -7,9 +7,10 @@ import { ServersComponent } from './servers/servers.component';
 import { ServerComponent } from './servers/server/server.component';
 import { ServerService } from './servers/server.service';
 import { TruncatePipe } from './truncate.pipe';
+import { FilterPipe } from './filter.pipe';
 
 @NgModule({
-  declarations: [AppComponent, ServersComponent, ServerComponent, TruncatePipe],
+  declarations: [AppComponent, ServersComponent, ServerComponent, TruncatePipe, FilterPipe],
   imports: [BrowserModule, FormsModule, ReactiveFormsModule],
   providers: [ServerService],
   bootstrap: [AppComponent],

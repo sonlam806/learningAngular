@@ -9,6 +9,7 @@ import { ServerService } from './server.service';
 })
 export class ServersComponent implements OnInit {
   servers!: Server[];
+  filteredStatus: string = '';
 
   constructor(private serverService: ServerService) {}
 
