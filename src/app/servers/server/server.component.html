@@ -5,8 +5,11 @@
       role="alert"
       [ngClass]="server.status === 'stable' ? 'alert-success' : 'alert-warning'"
     >
-      {{ server.name }} | {{ server.size | uppercase }} |
-      {{ server.createdAt | date }}
+      <strong>
+        {{ server.name | titlecase | truncate: 15 }}
+      </strong>
+      | {{ server.size | uppercase }} |
+      {{ server.createdAt | date: "fullDate" }}
       <span class="float-end badge rounded-pill bg-secondary">{{
         server.status
       }}</span>
