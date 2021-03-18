@@ -1,28 +1,63 @@
-import { Component } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { Post } from './post.model';
+import { NgForm } from '@angular/forms';
+import { PostsService } from './posts.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
 })
-export class AppComponent {
-  loadedPosts = [];
+export class AppComponent implements OnInit, OnDestroy {
+  @ViewChild('postForm') postForm!: NgForm;
+  loadedPosts: Post[] = [];
+  isLoading = false;
+  fetchPostsSub!: Subscription;
+  error: string | null = null;
+  errorSub!: Subscription;
 
-  constructor(private http: HttpClient) {}
+  constructor(private postsService: PostsService) {}
 
-  onCreatePost(post: Post) {
-    this.http
-      .post(
-        'https://angular-http-request-abcd3-default-rtdb.firebaseio.com/posts.json',
-        post
-      )
-      .subscribe((responseData) => console.log(responseData));
+  ngOnInit() {
+    this.errorSub = this.postsService.error.subscribe(
+      (err) => (this.error = err)
+    );
+    this.isLoading = true;
+    this.fetchPostsSub = this.postsService.fetchPosts().subscribe(
+      (posts) => {
+        this.loadedPosts = posts;
+        this.isLoading = false;
+      },
+      (err) => {
+        this.error = err.message;
+      }
+    );
   }
 
-  onFetchPosts() {}
+  onCreatePost(post: Post) {
+    this.postsService.createAndStorePost(post);
 
-  onClearPosts() {}
+    this.postForm.reset();
+  }
+
+  onFetchPosts() {
+    this.isLoading = true;
+    this.fetchPostsSub = this.postsService.fetchPosts().subscribe((posts) => {
+      this.loadedPosts = posts;
+      this.isLoading = false;
+    });
+  }
+
+  onClearPosts() {
+    this.postsService.deletePosts().subscribe(() => {
+      this.loadedPosts = [];
+    });
+  }
+
+  ngOnDestroy() {
+    this.fetchPostsSub.unsubscribe();
+    this.errorSub.unsubscribe();
+  }
 }
 

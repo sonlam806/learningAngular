@@ -34,6 +34,12 @@
     </div>
   </div>
   <hr />
+  <div class="row" *ngIf="isLoading && !error">
+    <div class="spinner-border" role="status">
+      <span class="visually-hidden">Loading...</span>
+    </div>
+  </div>
+
   <div class="row">
     <div class="col-xs-12 col-md-6 col-md-offset-3">
       <button class="btn btn-primary" (click)="onFetchPosts()">
@@ -49,9 +55,23 @@
       </button>
     </div>
   </div>
-  <div class="row">
-    <div class="col-xs-12 col-md-6 col-md-offset-3">
+  <div class="row my-2">
+    <div
+      *ngIf="loadedPosts.length === 0"
+      class="col-xs-12 col-md-6 col-md-offset-3"
+    >
       <p>No posts available!</p>
+    </div>
+  </div>
+  <div class="row my-2" *ngFor="let post of loadedPosts">
+    <div *ngIf="loadedPosts.length" class="col-xs-12 col-md-6 col-md-offset-3">
+      <h3>{{ post.title | uppercase }}</h3>
+      <p>{{ post.content }}</p>
+    </div>
+  </div>
+  <div class="row my-2" *ngIf="error">
+    <div class="alert alert-danger" role="alert">
+      {{ error }}
     </div>
   </div>
 </div>
