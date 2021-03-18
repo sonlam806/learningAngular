@@ -10,20 +10,7 @@ export class RecipeService {
   recipesChanged = new Subject<Recipe[]>();
   addedRecipeToShoppingList = new Subject<Recipe>();
 
-  private recipes: Recipe[] = [
-    new Recipe(
-      'Hambuger',
-      'This is simply a test',
-      'http://assets.epicurious.com/photos/57c5c6d9cf9e9ad43de2d96e/master/pass/the-ultimate-hamburger.jpg',
-      [new Ingredient('bread', 10), new Ingredient('meat', 2)]
-    ),
-    new Recipe(
-      'Hamburger 2',
-      'This is simply a copy',
-      'http://assets.epicurious.com/photos/57c5c6d9cf9e9ad43de2d96e/master/pass/the-ultimate-hamburger.jpg',
-      [new Ingredient('apple', 5)]
-    ),
-  ];
+  private recipes: Recipe[] = [];
 
   constructor(private shoppingListService: ShoppingListService) {}
 
@@ -46,6 +33,11 @@ export class RecipeService {
 
   updateRecipe(index: number, newRecipe: Recipe) {
     this.recipes[index] = newRecipe;
+    this.recipesChanged.next(this.recipes.slice());
+  }
+
+  updateRecipes(recipes: Recipe[]) {
+    this.recipes = recipes;
     this.recipesChanged.next(this.recipes.slice());
   }
 
