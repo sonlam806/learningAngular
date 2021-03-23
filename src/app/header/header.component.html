@@ -21,6 +21,7 @@
             aria-current="page"
             routerLink="/recipes"
             [routerLinkActive]="'active'"
+            *ngIf="isAuthenticated"
             >Recipes</a
           >
         </li>
@@ -32,9 +33,21 @@
             >Shopping List</a
           >
         </li>
+        <li class="nav-item">
+          <a
+            class="nav-link"
+            routerLink="/auth"
+            [routerLinkActive]="'active'"
+            *ngIf="!isAuthenticated"
+            >Auth</a
+          >
+        </li>
       </ul>
 
-      <ul class="navbar-nav navbar-right">
+      <ul class="navbar-nav navbar-right" *ngIf="isAuthenticated">
+        <li class="nav-item">
+          <a class="nav-link">Log out</a>
+        </li>
         <li class="nav-item dropdown">
           <a
             class="nav-link dropdown-toggle"
@@ -61,4 +74,3 @@
     </div>
   </div>
 </nav>
-
