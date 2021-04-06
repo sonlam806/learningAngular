@@ -1,6 +1,6 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Subject, throwError } from 'rxjs';
+import { BehaviorSubject, Subject, throwError } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 
 import { enviroment } from '../enviroment';
@@ -20,7 +20,8 @@ export interface AuthResponseData {
 export class AuthService {
   signinURL = `${enviroment.loginApiHost}${enviroment.apiKey}`;
   signupURL = `${enviroment.signupApiHost}${enviroment.apiKey}`;
-  user = new Subject<User>();
+  // @ts-ignore
+  user = new BehaviorSubject<User>(null);
 
   constructor(private http: HttpClient) {}
 

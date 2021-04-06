@@ -1,7 +1,6 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { exhaustMap, map, take, tap } from 'rxjs/operators';
-import { AuthService } from '../auth/auth.service';
+import { map, tap } from 'rxjs/operators';
 
 import { Recipe } from '../recipes/recipe.model';
 import { RecipeService } from '../recipes/recipe.service';
@@ -13,18 +12,16 @@ export class DataStorageService {
 
   constructor(
     private http: HttpClient,
-    private recipesService: RecipeService,
-    private authService: AuthService
+    private recipesService: RecipeService
   ) {}
 
   storeRecipes() {
     const recipes = this.recipesService.getRecipes();
-    this.http
-      .put(this.recipesURL, recipes)
-      .subscribe((response) => console.log(response));
+    this.http.put(this.recipesURL, recipes).subscribe();
   }
 
   fetchRecipes() {
+<<<<<<< HEAD
     return this.authService.user.pipe(
       take(1),
       exhaustMap((user) => {
@@ -35,6 +32,9 @@ export class DataStorageService {
           ),
         });
       }),
+=======
+    return this.http.get<Recipe[]>(this.recipesURL).pipe(
+>>>>>>> b7c6e700436ea1da9f8fee6a35f81e75921e3a96
       map((recipes) =>
         recipes.map((recipe) => {
           return {
