@@ -1,6 +1,7 @@
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Subject, throwError } from 'rxjs';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { Router } from '@angular/router';
+import { BehaviorSubject, throwError } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 
 import { enviroment } from '../enviroment';
@@ -20,10 +21,10 @@ export interface AuthResponseData {
 export class AuthService {
   signinURL = `${enviroment.loginApiHost}${enviroment.apiKey}`;
   signupURL = `${enviroment.signupApiHost}${enviroment.apiKey}`;
-  // @ts-ignore
-  user = new BehaviorSubject<User>(null);
 
-  constructor(private http: HttpClient) {}
+  user = new BehaviorSubject<User | null>(null);
+
+  constructor(private http: HttpClient, private router: Router) {}
 
   signupNewUser(email: string, password: string) {
     return this.http
@@ -37,6 +38,32 @@ export class AuthService {
           return this.handleError(error);
         })
       );
+  }
+
+  autoLogin() {
+    // @ts-ignore
+    const user: {
+      email: string;
+      id: string;
+      _token: string;
+      _tokenExpirationDate: string;
+    } = localStorage.getItem('userInfo')
+      ? // @ts-ignore
+        JSON.parse(localStorage.getItem('userInfo'))
+      : null;
+
+    if (!user) return;
+
+    const loadedUser = new User(
+      user.email,
+      user.id,
+      user._token,
+      new Date(user._tokenExpirationDate)
+    );
+
+    if (loadedUser.token) {
+      this.user.next(loadedUser);
+    }
   }
 
   login(email: string, password: string) {
@@ -56,6 +83,12 @@ export class AuthService {
       );
   }
 
+  logout() {
+    this.user.next(null);
+    localStorage.removeItem('userInfo');
+    this.router.navigate(['/auth']);
+  }
+
   private handleAuthentication(respData: {
     email: string;
     localId: string;
@@ -72,6 +105,8 @@ export class AuthService {
       expirationDate
     );
     this.user.next(user);
+    // store user info to localStorage
+    localStorage.setItem('userInfo', JSON.stringify(user));
   }
 
   private handleError(errorRes: HttpErrorResponse) {
@@ -95,4 +130,3 @@ export class AuthService {
     return throwError(errorMessage);
   }
 }
-
