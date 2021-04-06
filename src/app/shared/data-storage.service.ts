@@ -1,6 +1,6 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { concatMap, map, take, tap } from 'rxjs/operators';
+import { concatMap, exhaustMap, map, take, tap } from 'rxjs/operators';
 import { AuthService } from '../auth/auth.service';
 
 import { Recipe } from '../recipes/recipe.model';
@@ -25,10 +25,9 @@ export class DataStorageService {
   }
 
   fetchRecipes() {
-    console.log('fetch recipe');
     return this.authService.user.pipe(
       take(1),
-      concatMap((user) => {
+      exhaustMap((user) => {
         return this.http.get<Recipe[]>(this.recipesURL, {
           params: new HttpParams().set(
             'auth',
