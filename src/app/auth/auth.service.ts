@@ -23,6 +23,7 @@ export class AuthService {
   signupURL = `${enviroment.signupApiHost}${enviroment.apiKey}`;
 
   user = new BehaviorSubject<User | null>(null);
+  expirationTokenTimer: any;
 
   constructor(private http: HttpClient, private router: Router) {}
 
@@ -63,6 +64,9 @@ export class AuthService {
 
     if (loadedUser.token) {
       this.user.next(loadedUser);
+      const expirationDuration =
+        new Date(user._tokenExpirationDate).getTime() - new Date().getTime();
+      this.autoLogout(expirationDuration);
     }
   }
 
@@ -87,6 +91,17 @@ export class AuthService {
     this.user.next(null);
     localStorage.removeItem('userInfo');
     this.router.navigate(['/auth']);
+    if (this.expirationTokenTimer) {
+      clearTimeout(this.expirationTokenTimer);
+    }
+
+    this.expirationTokenTimer = null;
+  }
+
+  autoLogout(expirationDuration: number) {
+    this.expirationTokenTimer = setTimeout(() => {
+      this.logout();
+    }, expirationDuration);
   }
 
   private handleAuthentication(respData: {
@@ -107,6 +122,8 @@ export class AuthService {
     this.user.next(user);
     // store user info to localStorage
     localStorage.setItem('userInfo', JSON.stringify(user));
+    // add to event loop timer
+    this.autoLogout(+respData.expiresIn * 1000);
   }
 
   private handleError(errorRes: HttpErrorResponse) {
@@ -130,3 +147,4 @@ export class AuthService {
     return throwError(errorMessage);
   }
 }
+
