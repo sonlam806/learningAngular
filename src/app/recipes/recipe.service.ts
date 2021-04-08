@@ -4,7 +4,7 @@ import { Ingredient } from '../shared/ingredient.model';
 import { ShoppingListService } from '../shopping-list/shopping-list.service';
 import { Recipe } from './recipe.model';
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class RecipeService {
   selectedRecipe = new Subject<Recipe>();
   recipesChanged = new Subject<Recipe[]>();
@@ -47,3 +47,4 @@ export class RecipeService {
     this.recipesChanged.next(this.recipes.slice());
   }
 }
+

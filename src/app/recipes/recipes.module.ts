@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, Optional, SkipSelf } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -37,5 +37,13 @@ import { RecipeDetailComponent } from './recipe-detail/recipe-detail.component';
     RecipeEditComponent,
   ],
 })
-export class RecipesModule {}
+export class RecipesModule {
+  constructor(@Optional() @SkipSelf() parentModule?: RecipesModule) {
+    if (parentModule) {
+      throw new Error(
+        'RecipesModule is already loaded. Import it in the AppModule only'
+      );
+    }
+  }
+}
 

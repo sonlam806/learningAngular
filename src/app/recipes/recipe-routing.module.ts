@@ -34,3 +34,4 @@ const recipeRoutes: Routes = [
   exports: [RouterModule],
 })
 export class RecipeRoutingModule {}
+

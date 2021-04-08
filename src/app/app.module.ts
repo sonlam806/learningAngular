@@ -4,7 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 
-// Modules
+// Feature Modules
 import { RecipesModule } from './recipes/recipes.module';
 
 // Services
