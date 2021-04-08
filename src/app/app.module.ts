@@ -4,8 +4,14 @@ import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 
-import { RecipeService } from './recipes/recipe.service';
+// Modules
+import { RecipesModule } from './recipes/recipes.module';
 
+// Services
+import { RecipeService } from './recipes/recipe.service';
+import { AuthInterceptorService } from './auth/auth-interceptor.service';
+
+// Components
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
 import { ShoppingListComponent } from './shopping-list/shopping-list.component';
@@ -14,8 +20,6 @@ import { DropdownDirective } from './directives/dropdown.directive';
 import { NotFoundPageComponent } from './not-found-page/not-found-page.component';
 import { AuthComponent } from './auth/auth.component';
 import { LoadingSpinnerComponent } from './shared/loading-spinner/loading-spinner.component';
-import { AuthInterceptorService } from './auth/auth-interceptor.service';
-import { RecipesModule } from './recipes/recipes.module';
 
 @NgModule({
   declarations: [
@@ -47,3 +51,4 @@ import { RecipesModule } from './recipes/recipes.module';
   bootstrap: [AppComponent],
 })
 export class AppModule {}
+
