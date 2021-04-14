@@ -6,47 +6,35 @@ import { AppRoutingModule } from './app-routing.module';
 
 // Feature Modules
 import { RecipesModule } from './recipes/recipes.module';
+import { ShoppingListModule } from './shopping-list/shopping-list.module';
 
-// Services
-import { RecipeService } from './recipes/recipe.service';
-import { AuthInterceptorService } from './auth/auth-interceptor.service';
+// Another modules
+import { CoreModule } from './core.module';
+import { ShareModule } from './shared/share.module';
 
 // Components
 import { AppComponent } from './app.component';
-import { HeaderComponent } from './header/header.component';
-import { ShoppingListComponent } from './shopping-list/shopping-list.component';
-import { ShoppingEditComponent } from './shopping-list/shopping-edit/shopping-edit.component';
-import { DropdownDirective } from './directives/dropdown.directive';
 import { NotFoundPageComponent } from './not-found-page/not-found-page.component';
 import { AuthComponent } from './auth/auth.component';
-import { LoadingSpinnerComponent } from './shared/loading-spinner/loading-spinner.component';
+import { HeaderComponent } from './header/header.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
-    ShoppingListComponent,
-    ShoppingEditComponent,
-    DropdownDirective,
     NotFoundPageComponent,
     AuthComponent,
-    LoadingSpinnerComponent,
   ],
   imports: [
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
+    CoreModule,
     RecipesModule,
+    ShoppingListModule,
     AppRoutingModule,
-  ],
-  providers: [
-    RecipeService,
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: AuthInterceptorService,
-      multi: true,
-    },
+    ShareModule,
   ],
   bootstrap: [AppComponent],
 })
