@@ -9,6 +9,10 @@ const appRoutes: Routes = [
     redirectTo: '/recipes',
   },
   {
+    path: 'auth',
+    loadChildren: () => import('./auth/auth.module').then((m) => m.AuthModule),
+  },
+  {
     path: 'recipes',
     loadChildren: () =>
       import('./recipes/recipes.module').then((m) => m.RecipesModule),
@@ -19,10 +23,6 @@ const appRoutes: Routes = [
       import('./shopping-list/shopping-list.module').then(
         (m) => m.ShoppingListModule
       ),
-  },
-  {
-    path: 'auth',
-    loadChildren: () => import('./auth/auth.module').then((m) => m.AuthModule),
   },
   {
     path: '**',
@@ -37,4 +37,3 @@ const appRoutes: Routes = [
   exports: [RouterModule],
 })
 export class AppRoutingModule {}
-

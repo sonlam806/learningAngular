@@ -20,11 +20,10 @@ import { HeaderComponent } from './header/header.component';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
+    AppRoutingModule,
     CoreModule,
     ShareModule,
-    AppRoutingModule,
   ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
-
