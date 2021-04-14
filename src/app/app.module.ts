@@ -36,9 +36,9 @@ import { LoadingSpinnerComponent } from './shared/loading-spinner/loading-spinne
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
-    AppRoutingModule,
     HttpClientModule,
     RecipesModule,
+    AppRoutingModule,
   ],
   providers: [
     RecipeService,
