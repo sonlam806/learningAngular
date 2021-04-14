@@ -10,6 +10,11 @@ const appRoutes: Routes = [
     redirectTo: '/recipes',
   },
   {
+    path: 'recipes',
+    loadChildren: () =>
+      import('./recipes/recipes.module').then((m) => m.RecipesModule),
+  },
+  {
     path: 'auth',
     component: AuthComponent,
   },
