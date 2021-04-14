@@ -11,7 +11,6 @@ import { RecipeListComponent } from './recipe-list/recipe-list.component';
 import { RecipeStartComponent } from './recipe-start/recipe-start.component';
 import { RecipesComponent } from './recipes.component';
 import { RecipeDetailComponent } from './recipe-detail/recipe-detail.component';
-import { RecipeService } from './recipe.service';
 
 @NgModule({
   declarations: [
@@ -37,7 +36,6 @@ import { RecipeService } from './recipe.service';
     RecipeStartComponent,
     RecipeEditComponent,
   ],
-  providers: [RecipeService],
 })
 export class RecipesModule {
   constructor(@Optional() @SkipSelf() parentModule?: RecipesModule) {
