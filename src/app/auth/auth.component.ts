@@ -34,9 +34,9 @@ export class AuthComponent implements OnInit {
       authObs = this.authService.signupNewUser(email, password);
     }
     authObs.subscribe(
-      (result) => {
+      () => {
         this.isLoading = false;
-        this.router.navigate(['/recipes'])
+        this.router.navigate(['/recipes']);
       },
       (errorMsg) => {
         this.error = errorMsg;
@@ -47,3 +47,4 @@ export class AuthComponent implements OnInit {
     form.reset();
   }
 }
+
