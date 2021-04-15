@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { BehaviorSubject, throwError } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 
-import { enviroment } from '../enviroment';
+import { environment } from '../../environments/environment';
 import { User } from './auth.model';
 
 export interface AuthResponseData {
@@ -19,8 +19,8 @@ export interface AuthResponseData {
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
-  signinURL = `${enviroment.loginApiHost}${enviroment.apiKey}`;
-  signupURL = `${enviroment.signupApiHost}${enviroment.apiKey}`;
+  signinURL = `${environment.loginApiHost}${environment.firebaseAPIKey}`;
+  signupURL = `${environment.signupApiHost}${environment.firebaseAPIKey}`;
 
   user = new BehaviorSubject<User | null>(null);
   expirationTokenTimer: any;
@@ -147,3 +147,4 @@ export class AuthService {
     return throwError(errorMessage);
   }
 }
+

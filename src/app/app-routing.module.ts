@@ -4,11 +4,6 @@ import { NotFoundPageComponent } from './not-found-page/not-found-page.component
 
 const appRoutes: Routes = [
   {
-    path: '',
-    pathMatch: 'full',
-    redirectTo: '/recipes',
-  },
-  {
     path: 'auth',
     loadChildren: () => import('./auth/auth.module').then((m) => m.AuthModule),
   },
@@ -25,6 +20,11 @@ const appRoutes: Routes = [
       ),
   },
   {
+    path: '',
+    pathMatch: 'full',
+    redirectTo: '/recipes',
+  },
+  {
     path: '**',
     component: NotFoundPageComponent,
   },
@@ -37,3 +37,4 @@ const appRoutes: Routes = [
   exports: [RouterModule],
 })
 export class AppRoutingModule {}
+
